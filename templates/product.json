@@ -11,6 +11,25 @@
   "sections": {
     "main": {
       "type": "main-product",
+      "blocks": {
+        "title_tkNAfd": {
+          "type": "title",
+          "settings": {}
+        },
+        "price_m7Jz7A": {
+          "type": "price",
+          "settings": {}
+        },
+        "add_to_cart_xkfTfD": {
+          "type": "add_to_cart",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "title_tkNAfd",
+        "price_m7Jz7A",
+        "add_to_cart_xkfTfD"
+      ],
       "settings": {}
     },
     "featured_collection_bfpKit": {
