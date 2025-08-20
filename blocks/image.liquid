@@ -1,0 +1,42 @@
+<div class="image-block">
+  {% if block.settings.image %}
+    <img
+      src="{{ block.settings.image | image_url: width: 300 }}"
+      srcset="
+        {{ block.settings.image | image_url: width: 300 }} 300w,
+        {{ block.settings.image | image_url: width: 600 }} 600w,
+        {{ block.settings.image | image_url: width: 900 }} 900w,
+        {{ block.settings.image | image_url: width: 1200 }} 1200w
+      "
+      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+      alt="{{ block.settings.image.alt | escape }}"
+      loading="lazy"
+      width="{{ block.settings.image.width }}"
+      height="{{ block.settings.image.height }}"
+    >
+  {% else %}
+    <div class="image-placeholder">
+      {{ 'image' | placeholder_svg_tag }}
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Image",
+  "tag": "div",
+  "class": "image-block",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image"
+    }
+  ]
+}
+{% endschema %}

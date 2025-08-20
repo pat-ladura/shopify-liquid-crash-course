@@ -1,0 +1,23 @@
+<section class="container custom-section">
+  <div class="custom-section__content">
+    <h2>{{ section.settings.title }}</h2>
+    <p>{{ section.settings.description }}</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Custom Section",
+  "blocks": [
+    {
+      "type": "@theme"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Section",
+      "category": "General"
+    }
+  ]
+}
+{% endschema %}
