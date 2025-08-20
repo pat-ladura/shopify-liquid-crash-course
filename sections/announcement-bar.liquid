@@ -1,0 +1,60 @@
+<div
+  class="announcement-bar"
+  style="background-color: {{ section.settings.background_color }}; color: {{ section.settings.text_color }};"
+>
+  <div class="announcement-bar__content">
+    <p class="announcement-bar__text">{{ section.settings.text }}</p>
+  </div>
+</div>
+
+<style>
+  .announcement-bar {
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+  }
+
+  .announcement-bar__content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .announcement-bar__text {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Announcement Text",
+      "default": "Free shipping on orders over $50!"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement Bar",
+      "category": "Header",
+    }
+  ]
+}
+{% endschema %}

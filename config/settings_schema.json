@@ -1,0 +1,27 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Shopify Theme Course",
+    "theme_author": "Pat Ladura",
+    "theme_version": "1.0.0",
+    "theme_support_url": "https://github.com/Shopify/shopify-theme-course",
+    "theme_documentation_url": "https://shopify.dev/themes"
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "heading_font",
+        "label": "Heading Font",
+        "default": "helvetica_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "body_font",
+        "label": "Body Font",
+        "default": "helvetica_n4"
+      }
+    ]
+  }
+]

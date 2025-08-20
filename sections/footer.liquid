@@ -1,0 +1,208 @@
+<footer class="footer section-padding" style="padding-top: 4rem;">
+  <div class="container">
+    <div class="footer__content">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'menu' %}
+            <div class="footer__column footer__column--menu">
+              <h3 class="footer__title">{{ block.settings.menu_title }}</h3>
+              <nav class="footer__nav">
+                <ul class="footer__menu">
+                  {% for link in linklists[block.settings.menu_links].links %}
+                    <li>
+                      <a href="{{ link.url }}" class="footer__link">{{ link.title }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </nav>
+            </div>
+          {% when 'newsletter' %}
+            <div class="footer__column footer__column--newsletter">
+              <h3 class="footer__title">Stay Updated</h3>
+              <p class="footer__text">Subscribe to our newsletter for the latest updates and offers.</p>
+
+              {% form 'contact' %}
+                <div class="newsletter-form">
+                  <input
+                    type="email"
+                    name="contact[email]"
+                    placeholder="Enter your email"
+                    class="newsletter-form__input"
+                    required
+                  >
+                  <button type="submit" class="product-form__cart-button newsletter-form__button">Subscribe</button>
+                </div>
+              {% endform %}
+            </div>
+        {% endcase %}
+      {% endfor %}
+      {% comment %}
+        <!-- Menu Column -->
+        <div class="footer__column footer__column--menu">
+          <h3 class="footer__title">Quick Links</h3>
+          <nav class="footer__nav">
+            <ul class="footer__menu">
+              {% for link in linklists['main-menu'].links %}
+                <li>
+                  <a href="{{ link.url }}" class="footer__link">{{ link.title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Newsletter Column -->
+        <div class="footer__column footer__column--newsletter">
+          <h3 class="footer__title">Stay Updated</h3>
+          <p class="footer__text">Subscribe to our newsletter for the latest updates and offers.</p>
+
+          {% form 'contact' %}
+            <div class="newsletter-form">
+              <input
+                type="email"
+                name="contact[email]"
+                placeholder="Enter your email"
+                class="newsletter-form__input"
+                required
+              >
+              <button type="submit" class="product-form__cart-button newsletter-form__button">Subscribe</button>
+            </div>
+          {% endform %}
+        </div>
+      {% endcomment %}
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer__bottom">
+      <p class="footer__copyright">
+        &copy; {{ 'now' | date: '%Y' }}
+        {{ shop.name }}. All rights reserved.
+      </p>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "tag": "section",
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Footer Menu",
+      "settings": [
+        {
+            "type": "text",
+            "id": "menu_title",
+            "label": "Menu Title",
+            "default": "Quick Links"
+        },
+        {
+          "type": "link_list",
+          "id": "menu_links",
+          "label": "Menu Links"
+        }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "name": "Newsletter Signup",
+      "settings": []
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer",
+      "category": "General"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+  .footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+  }
+
+  .footer__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 2rem;
+  }
+
+  .footer__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+
+  .footer__menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .footer__menu li {
+    margin-bottom: 0.75rem;
+  }
+
+  .footer__link {
+    color: #666;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer__link:hover {
+    color: #333;
+  }
+
+  .footer__text {
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .newsletter-form {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .newsletter-form__input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+
+  .newsletter-form__button {
+    white-space: nowrap;
+  }
+
+  .footer__bottom {
+    padding-top: 2rem;
+    border-top: 1px solid #e9ecef;
+    text-align: center;
+  }
+
+  .footer__copyright {
+    color: #666;
+    font-size: 0.875rem;
+    margin: 0;
+    padding: 1.5rem 0;
+  }
+
+  @media (max-width: 768px) {
+    .footer__content {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .newsletter-form {
+      flex-direction: column;
+    }
+  }
+{% endstylesheet %}

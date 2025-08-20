@@ -1,0 +1,55 @@
+<div class="container">
+  <h1 class="collection-title">{{ collection.title }}</h1>
+
+  <div class="product-grid">
+    {% for product in collection.products %}
+      <div class="product-card">
+        <a href="{{ product.url }}">
+          <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}" class="product-image">
+          <h3 class="product-title">{{ product.title }}</h3>
+          <p class="product-price">{{ product.price | money }}</p>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Main Collection",
+  "tag": "section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Main Collection",
+      "category": "General"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+  .collection-title {
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .product-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .product-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+{% endstylesheet %}

@@ -1,0 +1,104 @@
+<div class="featured-collection">
+  <div class="container">
+    {% if section.settings.title != blank %}
+      <h2 class="featured-collection__title">{{ section.settings.title }}</h2>
+    {% endif %}
+
+    {% if section.settings.collection != blank %}
+      {% assign collection = collections[section.settings.collection] %}
+
+      <div class="featured-collection__products">
+        {% for product in collection.products limit: section.settings.products_to_show %}
+          <div class="product-card">
+            <a href="{{ product.url }}">
+              <img
+                src="{{ product.featured_image | img_url: '300x300' }}"
+                alt="{{ product.title }}"
+                class="product-image"
+              >
+              <h3 class="product-title">{{ product.title }}</h3>
+              <p class="product-price">{{ product.price | money }}</p>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>Please select a collection to display.</p>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  .featured-collection {
+    padding: 40px 0;
+    background-color: #f8f9fa;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .featured-collection__title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 40px;
+    color: #333;
+  }
+
+  .featured-collection__products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+  }
+
+  @media (max-width: 768px) {
+    .featured-collection__products {
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .featured-collection__title {
+      font-size: 2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .featured-collection__products {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Featured Collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Featured Collection"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "number",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "default": 4
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collection",
+      "category": "General"
+    }
+  ]
+}
+{% endschema %}
